@@ -1,4 +1,5 @@
 # Starter pipeline
+
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
@@ -15,8 +16,15 @@ variables:
 
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloudBakery'
+    organization: '210503-reston-net'
+    scannerMode: 'MSBuild'
+    projectKey: '210503-Reston-NET_Chris-Weafer-P1'
+    projectName: 'Chris-Weafer-P1'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
@@ -28,6 +36,19 @@ steps:
     command: 'build'
     projects: '$(solution)'
     feedsToUse: 'select'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '**/corbertura/coverage.xml'
+
+
+- task: SonarCloudAnalyze@1
+  displayName: Run Code Analysis
+
+- task: SonarCloudAnalyze@1
+  displayName: Publish Code Analysis
+
 - task: DotNetCoreCLI@2
   displayName: Publish
   inputs:
@@ -42,10 +63,4 @@ steps:
     appType: 'webApp'
     WebAppName: 'OnlineBakeryService'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-##task: DotNetCoreCLI@2
-##  displayName: Test
-##  inputs:
-##   command: 'test'
-##    projects: '$(solution)'
-##    feedsToUse: 'select'
 
