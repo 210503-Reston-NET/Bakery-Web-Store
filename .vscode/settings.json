@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/7d0b24a1-4174-4a95-bcfa-bc7625ec5981/resourceGroups/Bread-Store/providers/Microsoft.Web/sites/OnlineBakeryService",
+    "appService.deploySubpath": "BakeryWebUI\\publish"
+}
