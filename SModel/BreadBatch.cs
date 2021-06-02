@@ -6,6 +6,12 @@ namespace SModel
         {
 
         }
+        public BreadBatch(int oID, int productNum, int quantity)
+        {
+            OrderId = oID;
+            ProductId = productNum;
+            BreadQuantity = quantity;
+        }
 
         //Primary Key
         public int BreadBatchId { get; set; }

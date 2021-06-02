@@ -5,6 +5,12 @@ namespace SModel
         public BakeryInventory()
         {
         }
+        public BakeryInventory(int storeId, int productId, int stock)
+        {
+            Stock = stock;
+            ProductId = productId;
+            StoreId = storeId;
+        }
 
         //Primary Key
         public int Id { get; set; }

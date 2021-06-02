@@ -1,0 +1,57 @@
+﻿@model IEnumerable<BakeryWebUI.Models.OrderVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="orders">
+
+    <h1>@ViewBag.cust.FirstName, @ViewBag.cust.LastName</h1>
+    <h2>@ViewBag.cust.Id</h2>
+    <h4>Your Orders:</h4>
+
+    <p>
+        @Html.ActionLink("Add n Order", "Create", new { id = ViewBag.cust.Id })
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Loaf.Breadtype)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BreadCount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.OrderTotal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CustomerId)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Loaf.Breadtype)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BreadCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerId)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        @Html.ActionLink("Back to list of Customers", "Index", "Customer")
+    </div>
+</div>

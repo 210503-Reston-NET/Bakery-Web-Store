@@ -2,6 +2,7 @@ using SModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 namespace SDL
 {   
     public class CustomerDB : ICustStorage{
@@ -31,40 +32,51 @@ namespace SDL
             if(get == null) return null;
             else return new Customer(get.Id, get.FirstName, get.LastName);
         }
-        
-        
+
+        public Customer GetCustomerById(int id)
+        {
+            return _OBContext.Customers.Find(id);
+        }
+
+
         public List<Customer> GetAllCustomers()
         {
             return _OBContext.Customers
             .Select(
-                customer => new Customer(customer.FirstName, customer.LastName)
+                customer => customer
             ).ToList();
         }
 
         //Order Logic
         public Orders AddOrder(Customer customer, Orders order, int location)
         {
-            BakeryDBContext _OBContext1 = new BakeryDBContext();
-            Orders t =  new Orders
-                {
-                    CustomerId = GetCustomer(customer).Id,
-                    OrderTotal = order.Loaf.Price*order.BreadCount,
-                    BakeryId = location
-                };
-            _OBContext1.Orders.Add(t);
-            _OBContext1.SaveChanges();
-            int tempID = t.Id;
-            Console.WriteLine(tempID);
-
-            _OBContext.BreadBatches.Add(
-                new BreadBatch
-                {
-                    OrderId = tempID,
-                    ProductId = order.Loaf.BreadId,
-                    BreadQuantity = order.BreadCount
-                }
-            );
+            Debug.WriteLine(GetCustomer(customer).Id);
+            Debug.WriteLine(order.Loaf);
+            //BakeryDBContext _OBContext1 = new BakeryDBContext();
+            _OBContext.Orders.Add(new Orders
+            {
+                Id = order.Id,
+                //Loaf = order.Loaf,
+                BreadCount = order.BreadCount,
+                CustomerId = GetCustomer(customer).Id,
+                OrderTotal = order.Loaf.Price * order.BreadCount,
+                BakeryId = location
+            });
+            Debug.WriteLine("Hello");
+            //_OBContext.Orders.Add(t);
             _OBContext.SaveChanges();
+            //int tempID = t.Id;
+            //Console.WriteLine(tempID);
+
+            //_OBContext.BreadBatches.Add(
+            //    new BreadBatch
+            //    {
+            //        OrderId = tempID,
+            //        ProductId = order.Loaf.BreadId,
+            //        BreadQuantity = order.BreadCount
+            //    }
+            //);
+            //_OBContext.SaveChanges();
             return order;
         }
         /// <summary>

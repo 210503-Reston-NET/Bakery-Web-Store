@@ -12,6 +12,8 @@ namespace SDL
         Customer AddCustomer(Customer customer);
         Customer GetCustomer(Customer customer);
 
+        Customer GetCustomerById(int id);
+
         Orders AddOrder(Customer customer, Orders order, int location);
         List<Orders> GetOrders(Customer customer);
         

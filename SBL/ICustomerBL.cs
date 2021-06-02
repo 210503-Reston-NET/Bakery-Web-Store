@@ -8,6 +8,8 @@ namespace SBL
 
         Customer GetCustomer(Customer customer);
 
+        Customer GetCustomerById(int id);
+
         List<Customer> GetAllCustomers();
 
     }

@@ -15,6 +15,10 @@ namespace SBL
         {
             return storage.AddCustomer(customer);
         }
+        public Customer GetCustomerById(int id)
+        {
+            return storage.GetCustomerById(id);
+        }
 
         public Customer GetCustomer(Customer customer)
         {

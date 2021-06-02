@@ -1,0 +1,75 @@
+﻿@model BakeryWebUI.Models.OrderVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="orders">
+
+    <h1>Create</h1>
+    <h2>@Model.CustomerId </h2>
+    <h4>OrderVM</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="LocationSelection" class="control-label"></label>
+                    <select name="LocationSelection" id="LocationSelection">
+                        <option value="1">Ben's Bakery,</option>
+                        <option value="2">Suzies</option>
+                        <option value="3">SD Breads & More</option>
+                        <option value="4">Pita Palace</option>
+                        <option value="5">Wheat Workerse</option>
+                        <option value="6">Bread Store</option>
+                        <option value="7">Chomps</option>
+                        <option value="8">Matzo & More</option>
+                        <option value="9">Desert Farms</option>
+                    </select>
+                    <span asp-validation-for="LocationSelection" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BreadSelection" class="control-label"></label>
+                    <select name="BreadSelection" id="BreadSelection">
+                        <option value="Baguette">Baguette</option>
+                        <option value="Brioche">Brioche</option>
+                        <option value="Bagel">Bagel</option>
+                        <option value="Sourdough">Sourdough</option>
+                        <option value="Rye">Rye</option>
+                        <option value="Pita">Pita</option>
+                        <option value="Multigrain">Multigrain</option>
+                        <option value="Focaccia">Focaccia</option>
+                        <option value="White">White</option>
+                        <option value="Wheat">Wheat</option>
+                        <option value="English Muffin">English Muffin</option>
+                        <option value="Matzo">Matzo</option>
+                        <option value="Tortilla">Tortilla</option>
+                        <option value="Banana">Banana</option>
+                        <option value="Breadstick">Breadstick</option>
+                        <option value="Corn Bread">Corn Bread</option>
+                        <option value="Pumpernickel">Pumpernickel</option>
+                    </select>
+                    <span asp-validation-for="BreadSelection" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="BreadCount" class="control-label"></label>
+                    <input asp-for="BreadCount" class="form-control" />
+                    <span asp-validation-for="BreadCount" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="CustomerId" value=@Model.CustomerId/>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        @Html.ActionLink("Back to Orders", "Index", new { id = @Model.CustomerId })
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</div>

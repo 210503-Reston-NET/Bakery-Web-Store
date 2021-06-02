@@ -24,6 +24,13 @@ namespace SModel
             Loaf = type;
             BreadCount = count;
         }
+        public Orders(int id, int custID, Bread type, int count)
+        {
+            Id = id;
+            CustomerId = custID;
+            Loaf = type;
+            BreadCount = count;
+        }
 
         /// <summary>
         /// Constructor to initialize Orders in the get order method

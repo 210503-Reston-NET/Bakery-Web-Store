@@ -1,15 +1,14 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+.navbar {
+    background: none;
+}
 a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+  cursor: pointer;
 }
 
 .btn-primary {
@@ -18,15 +17,106 @@ a {
   border-color: #1861ac;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.logo img{
+    Width: 200px;
+    height: 200px;
+    margin-top: -7px;
+}
+.navbar-collapse {
+    justify-content: center;
+}
+.nav-link:hover {
+    background: #f4f4f4;
+    color: #f97300;
+}
+.nav-link{
+    margin-right: 1em !important;
+    color: #d4852f
+}
+.bg-dark {
+    background-color: #343a40 !important
 }
 
-/* Sticky footer styles
+.bg-primary {
+    background-color: #007bff !important
+}
+.header {
+    background-image: url('../images/BackGround.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+  
+}
+.overlay {
+    position: absolute;
+    min-height: 100%;
+    min-width: 100%;
+    background-position: center;
+    background: rgba(244, 244, 244, 0.2);
+}
+/*Home Index Formatting*/
+.intro {
+    position: absolute;
+    top: 30%;
+    margin: auto;
+    padding: 2em;
+}
+
+.intro h1 {
+    color: #fff;
+}
+ 
+.intro p {
+    color: #fff;
+    font-size: 20px;
+    width: 50%;
+    line-height: 1.5;
+}
+
+.intro button {
+    border: 1px solid #F97300;
+    background: #e47810;
+    color: #fff;
+}
+
+/*Customer Index Formatting*/
+.customer {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    text-align: center;
+    padding: 2em;
+    color: #fff;
+}
+.customer h1 {
+    color: #fff;
+}
+.customer th{
+    color: #fff;
+}
+.customer td{
+    color: #fff;
+}
+.orders {
+    position: absolute;
+    top: 30%;
+    padding: 2em;
+    color: #fff;
+}
+.orders h1 {
+    color: #fff;
+}
+
+.orders th {
+    color: #fff;
+}
+
+.orders td {
+        color: #fff;
+}
+    /* Sticky footer styles
 -------------------------------------------------- */
-html {
+    html {
   font-size: 14px;
 }
 @media (min-width: 768px) {
@@ -42,9 +132,9 @@ html {
   border-bottom: 1px solid #e5e5e5;
 }
 
-.box-shadow {
+/*.box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
+}*/
 
 button.accept-policy {
   font-size: 1rem;
