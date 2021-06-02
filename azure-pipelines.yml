@@ -1,0 +1,71 @@
+# Starter pipeline
+
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool: default
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildCOnfiguration: 'Release'
+
+
+steps:
+
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloudBakery'
+    organization: '210503-reston-net'
+    scannerMode: 'MSBuild'
+    projectKey: '210503-Reston-NET_Chris-Weafer-P1'
+    projectName: 'Chris-Weafer-P1'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '$(solution)'
+    feedsToUse: 'select'
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: 'build'
+    projects: '$(solution)'
+    feedsToUse: 'select'
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: 'test'
+    projects: '**/BakeryTest/*.csproj'
+    arguments: --configuration $(buildConfiguration) --collect "Code Coverage"
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '**/corbertura/coverage.xml'
+
+
+- task: SonarCloudAnalyze@1
+  displayName: Run Code Analysis
+
+- task: SonarCloudPublish@1
+  displayName: Publish Code Analysis
+  
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    zipAfterPublish: true
+    projects: '**/BakeryWebUI'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(7d0b24a1-4174-4a95-bcfa-bc7625ec5981)'
+    appType: 'webApp'
+    WebAppName: 'OnlineBakeryService'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
