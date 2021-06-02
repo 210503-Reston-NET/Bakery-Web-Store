@@ -1,0 +1,55 @@
+# Starter pipeline
+
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool: default
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildCOnfiguration: 'Release'
+
+
+steps:
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '$(solution)'
+    feedsToUse: 'select'
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: 'build'
+    projects: '$(solution)'
+    feedsToUse: 'select'
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: 'test'
+    projects: '**/BakeryTest/*.csproj'
+    arguments: --configuration $(buildConfiguration) --collect "Code Coverage"
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '**/corbertura/coverage.xml'
+
+  
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    zipAfterPublish: true
+    projects: '**/BakeryWebUI'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(7d0b24a1-4174-4a95-bcfa-bc7625ec5981)'
+    appType: 'webApp'
+    WebAppName: 'OnlineBakeryService'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
