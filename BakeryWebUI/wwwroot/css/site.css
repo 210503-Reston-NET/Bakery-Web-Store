@@ -26,8 +26,7 @@ a.navbar-brand {
     justify-content: center;
 }
 .nav-link:hover {
-    background: #f4f4f4;
-    color: #f97300;
+    color: #e47810;
 }
 .nav-link{
     margin-right: 1em !important;
@@ -51,6 +50,7 @@ a.navbar-brand {
     position: absolute;
     min-height: 100%;
     min-width: 100%;
+
     background-position: center;
     background: rgba(244, 244, 244, 0.2);
 }
@@ -58,6 +58,7 @@ a.navbar-brand {
 .intro {
     position: absolute;
     top: 30%;
+    left: 42%;
     margin: auto;
     padding: 2em;
 }
@@ -82,9 +83,8 @@ a.navbar-brand {
 /*Customer Index Formatting*/
 .customer {
     position: absolute;
-    top: 40%;
-    left: 40%;
-    text-align: center;
+    top: 30%;
+    left: 42%;
     padding: 2em;
     color: #fff;
 }
@@ -97,9 +97,11 @@ a.navbar-brand {
 .customer td{
     color: #fff;
 }
+
 .orders {
     position: absolute;
     top: 30%;
+    left: 42%;
     padding: 2em;
     color: #fff;
 }

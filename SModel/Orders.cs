@@ -51,7 +51,6 @@ namespace SModel
 
         public int Id;
         public int BreadCount{ get; set; }
-        
         public double OrderTotal{ get; set;}
         public Bread Loaf{ get; set; } 
         public Bakery bakery{ get; set; } 

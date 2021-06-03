@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BakeryWebUI.Models.InventoryVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="orders">
+
+    <h1>Inventory</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.breadName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stock)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.breadName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Stock)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new {  beard=item.breadName, id = item.Id }) |
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -26,6 +26,11 @@ namespace BakeryWebUI.Controllers
             ViewBag.cust = _custBL.GetCustomerById(id);
 
             List<Orders> orderList = _orderBL.GetOrders(_custBL.GetCustomerById(id));
+            foreach(Orders o in orderList)
+            {
+                 Debug.WriteLine(o.Loaf);
+            }
+
             return View(orderList
                    .Select(Orders => new OrderVM(Orders))
                    .ToList());
@@ -48,10 +53,13 @@ namespace BakeryWebUI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(OrderVM model)
         {
-            //Debug.WriteLine(_orderBL.GetBread(_orderVM.BreadSelection).Breadtype);
+            Debug.WriteLine(_orderBL.GetBread(model.BreadSelection).Breadtype);
+            Debug.WriteLine(_orderBL.GetBread(model.BreadSelection));
             try
             {
                 
+
+
                 if (ModelState.IsValid)
                 {
                     _orderBL.AddOrder(_custBL.GetCustomerById(model.CustomerId), new Orders

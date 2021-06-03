@@ -10,8 +10,13 @@
                 Welcome to Wheat Works!
                 <p>
                     Order fresh baked bread from local bakeries across the country.
+                    Enter your ID below to view your account.
                 </p>
             </h1>
+            <form method="post" asp-area="" asp-controller="Home" asp-action="Search">
+                <input name="Id" type="text" placeholder="ID...">
+                <button type="submit">Search</button>
+            </form>
         </div>
     </div>
 

@@ -1,75 +1,65 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using SBL;
 using SModel;
 using BakeryWebUI.Models;
 namespace BakeryWebUI.Controllers
 {
-    public class CustomerController : Controller
+    public class LocationController : Controller
     {
-        private ICustomerBL _custBL;
+        private IOrderBL _ordBL;
 
-        public CustomerController(ICustomerBL cBL)
+        public LocationController(IOrderBL obl)
         {
-            _custBL = cBL;
+            _ordBL = obl;
         }
-        // GET: CustomerController
+        // GET: LocationController
         public ActionResult Index()
         {
-            return View(_custBL.GetAllCustomers()
-                .Select(customer =>
-                new CustomerVM(customer))
+            return View(_ordBL.GetBakeries()
+                .Select(bakery =>
+                new LocationVM(bakery))
                 .ToList());
         }
 
-        // GET: CustomerController/Details/5
+        // GET: LocationController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: CustomerController/Create
+        // GET: LocationController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CustomerController/Create
+        // POST: LocationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CustomerVM custVM)
+        public ActionResult Create(IFormCollection collection)
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    _custBL.AddCustomer(new Customer
-                    {
-                        Id = custVM.Id,
-                        FirstName = custVM.FirstName,
-                        LastName = custVM.LastName
-                    });
-                    return RedirectToAction(nameof(Index));
-                }
-                return View(custVM);
+                return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View(custVM);
+                return View();
             }
         }
 
-        // GET: CustomerController/Edit/5
-        public ActionResult Edit()
+        // GET: LocationController/Edit/5
+        public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: CustomerController/Edit/5
+        // POST: LocationController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -84,13 +74,13 @@ namespace BakeryWebUI.Controllers
             }
         }
 
-        // GET: CustomerController/Delete/5
+        // GET: LocationController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(new CustomerVM(_custBL.GetCustomerById(id)));
+            return View();
         }
 
-        // POST: CustomerController/Delete/5
+        // POST: LocationController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

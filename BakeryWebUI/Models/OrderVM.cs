@@ -23,9 +23,9 @@ namespace BakeryWebUI.Models
             CustomerId = order.CustomerId;
             BreadCount = order.BreadCount;
             OrderTotal = order.OrderTotal;
-
+            bakery = order.bakery;
+            BreadType = order.Loaf.Breadtype;
         }
-
 
         public int Id;
         [Required]
@@ -35,6 +35,8 @@ namespace BakeryWebUI.Models
         public string BreadSelection { get; set; }
         [Required]
         public int LocationSelection { get; set; }
+
+        public string BreadType { get; set; }
 
         public Bread Loaf { get; set; }
         public Bakery bakery { get; set; }

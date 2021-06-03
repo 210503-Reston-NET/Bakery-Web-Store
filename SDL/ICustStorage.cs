@@ -16,12 +16,13 @@ namespace SDL
 
         Orders AddOrder(Customer customer, Orders order, int location);
         List<Orders> GetOrders(Customer customer);
-        
+
         List<Orders> GetBakeryOrders(int location);
         List<Bread> GetBakeryInventory(int locationID);
         void UpdateInventory(int locationID, int BreadType, int moreBread);
         List<Customer> GetAllCustomers();
-
-         Bread GetBread(string breadtype);
+        List<Bakery> GetBakeries();
+        Bread GetBread(string breadtype);
+        BakeryInventory GetInventoryByID(int id);
     }
 }

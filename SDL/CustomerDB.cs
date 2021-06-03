@@ -37,6 +37,10 @@ namespace SDL
         {
             return _OBContext.Customers.Find(id);
         }
+        public int GetOrderById(int Id)
+        {
+            return _OBContext.Orders.Find(Id).Id;
+        }
 
 
         public List<Customer> GetAllCustomers()
@@ -50,35 +54,30 @@ namespace SDL
         //Order Logic
         public Orders AddOrder(Customer customer, Orders order, int location)
         {
-            Debug.WriteLine(GetCustomer(customer).Id);
-            Debug.WriteLine(order.Loaf);
-            //BakeryDBContext _OBContext1 = new BakeryDBContext();
+
+            int i = order.Id;
+            Debug.WriteLine("Order ID: " + i);
             _OBContext.Orders.Add(new Orders
             {
-                Id = order.Id,
-                //Loaf = order.Loaf,
+                Id = i,     
                 BreadCount = order.BreadCount,
                 CustomerId = GetCustomer(customer).Id,
                 OrderTotal = order.Loaf.Price * order.BreadCount,
                 BakeryId = location
             });
-            Debug.WriteLine("Hello");
-            //_OBContext.Orders.Add(t);
             _OBContext.SaveChanges();
-            //int tempID = t.Id;
-            //Console.WriteLine(tempID);
-
-            //_OBContext.BreadBatches.Add(
-            //    new BreadBatch
-            //    {
-            //        OrderId = tempID,
-            //        ProductId = order.Loaf.BreadId,
-            //        BreadQuantity = order.BreadCount
-            //    }
-            //);
-            //_OBContext.SaveChanges();
+            _OBContext.BreadBatches.Add(
+                new BreadBatch
+                {
+                    OrderId = i,
+                    ProductId = order.Loaf.BreadId,
+                    BreadQuantity = order.BreadCount
+                }
+            );
+            _OBContext.SaveChanges();
             return order;
         }
+
         /// <summary>
         /// Returns a list of all odders contained within a customer object
         /// </summary>
@@ -92,8 +91,9 @@ namespace SDL
                     order => new Orders
                     {
                         Id = order.Id,
-                        BreadCount = Convert.ToInt32(_OBContext.BreadBatches.FirstOrDefault(ord => ord.OrderId == order.Id).BreadQuantity),
-                        Loaf = new Bread(Convert.ToInt32(_OBContext.BreadBatches.FirstOrDefault(ord => ord.OrderId == order.Id).ProductId)),
+                        //BreadCount = Convert.ToInt32(_OBContext.BreadBatches.FirstOrDefault(ord => ord.OrderId == order.Id).BreadQuantity),
+                        BreadCount = order.BreadCount,
+                        Loaf = new Bread(Convert.ToInt32(_OBContext.BreadBatches.FirstOrDefault(ord => ord.OrderId == order.Id))),
                         //Loaf = GetBreadName(Convert.ToInt32(_OBContext.BreadBatches.FirstOrDefault(ord => ord.OrderId == order.OrderNumber).ProductId)),
                         bakery = new Bakery(Convert.ToInt32(order.BakeryId), _OBContext.Bakeries.FirstOrDefault(bake => bake.BakeryId == order.BakeryId).BakeryName),
                         OrderTotal = Convert.ToDouble(order.OrderTotal)
@@ -146,6 +146,15 @@ namespace SDL
             _OBContext.SaveChanges();
         }
 
+        public List<Bakery> GetBakeries()
+        {
+            return _OBContext.Bakeries
+            .Select(
+                bakery => bakery
+            ).ToList();
+
+        }
+
         //Bread Logic
 
         public Bread GetBreadName(int itemID)
@@ -159,6 +168,10 @@ namespace SDL
             Bread get = _OBContext.Breads.FirstOrDefault(bread => bread.Breadtype == breadBrand);
             if(get == null) return null;
             else return new Bread(get.BreadId, get.Breadtype, get.Price);
+        }
+        public BakeryInventory GetInventoryByID(int id)
+        {
+            return _OBContext.BakeryInventories.Find(id);
         }
     }
 }

@@ -10,7 +10,12 @@ namespace SBL
         List<Orders> GetOrders(Customer customer);
         List<Orders> GetBakeryOrders(int location);
         List<Bread> GetBakeryInvertory(int location);
+
+        List<Bakery> GetBakeries();
+
+        BakeryInventory GetInventoryByID(int id);
         void UpdateInventory(int locationID, int BreadType, int moreBread);
         Bread GetBread(string breadType);
+
     }
 }

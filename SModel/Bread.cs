@@ -28,6 +28,14 @@ namespace SModel
             this.Price = price;
             this.Stock = stock;
         }
+        public Bread(Bread bread)
+        {
+            this.BreadId = bread.BreadId;
+            this.Breadtype = bread.Breadtype;
+            this.Price = bread.Price;
+            this.Stock = bread.Stock;
+ 
+        }
 
         /// <summary>
         /// Primary Key

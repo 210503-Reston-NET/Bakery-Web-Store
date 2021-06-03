@@ -20,8 +20,8 @@ namespace SBL
         /// <returns></returns>
         public Orders AddOrder(Customer customer, Orders orders, int location)
         {
-            _storage.AddOrder(customer, orders, location);
-            return orders;
+            Orders preBatch = _storage.AddOrder(customer, orders, location);
+            return preBatch;
         }
 
         /// <summary>
@@ -59,6 +59,15 @@ namespace SBL
         {
             _storage.UpdateInventory(locationID, BreadType, moreBread);
         }
-        
+
+        public List<Bakery> GetBakeries()
+        {
+            return _storage.GetBakeries();
+        }
+        public BakeryInventory GetInventoryByID(int id)
+        {
+            return _storage.GetInventoryByID(id);
+        }
+
     }
 }

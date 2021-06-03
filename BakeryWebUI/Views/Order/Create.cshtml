@@ -57,7 +57,8 @@
                     <input asp-for="BreadCount" class="form-control" />
                     <span asp-validation-for="BreadCount" class="text-danger"></span>
                 </div>
-                <input type="hidden" asp-for="CustomerId" value=@Model.CustomerId/>
+                <input type="hidden" asp-for="CustomerId" value=@Model.CustomerId />
+                <input type="hidden" asp-for="Id" value=@Model.CustomerId />
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>

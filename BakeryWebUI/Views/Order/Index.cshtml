@@ -7,7 +7,6 @@
 <div class="orders">
 
     <h1>@ViewBag.cust.FirstName, @ViewBag.cust.LastName</h1>
-    <h2>@ViewBag.cust.Id</h2>
     <h4>Your Orders:</h4>
 
     <p>
@@ -17,7 +16,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Loaf.Breadtype)
+                    @Html.DisplayNameFor(model => model.BreadType)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.BreadCount)
@@ -26,7 +25,10 @@
                     @Html.DisplayNameFor(model => model.OrderTotal)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CustomerId)
+                    @Html.DisplayNameFor(model => model.bakery.BakeryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
                 </th>
                 <th></th>
             </tr>
@@ -34,20 +36,23 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Loaf.Breadtype)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BreadCount)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OrderTotal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustomerId)
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BreadType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BreadCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bakery.BakeryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+            </tr>
             }
         </tbody>
     </table>

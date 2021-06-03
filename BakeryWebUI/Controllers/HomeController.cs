@@ -28,6 +28,12 @@ namespace BakeryWebUI.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Search(int Id)
+        {
+            return RedirectToAction("Index", "Order", new { id = Id});
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
