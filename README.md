@@ -1,8 +1,7 @@
 # Bakery-Web-Store
 
 # P1 MVC Bread Store Implementation
-Bakery-Web-Store is a web application designed to make connecting with your local bakery easier. Bakeries from across the United States take part and are accesible ot users.
-Users may place order with their Bakery of choice, and bakery owners may.
+Bakery-Web-Store is a web application designed to make connecting with your local bakery easier. Bakeries from across the United States take part and are accesible to users. Users may place order with their bakery of choice, and bakery owners may view the inventories of their stores. This application is highly expandable to new functionality and new bakeries throughout the country. 
 
 # Technologies Used
   - C#
@@ -19,7 +18,7 @@ Users may place order with their Bakery of choice, and bakery owners may.
 Core Features
  - Add A User
  - View Bakeries
- - Search User
+ - Search for a user
  - Place orders with a specific bakery
  - View Inventory for a specific bakery as a store owner
  
@@ -29,9 +28,6 @@ Further Additions
  - Login Functionality
  - Logging
  
-# Get Started
-
-# Usage
   
 
 
